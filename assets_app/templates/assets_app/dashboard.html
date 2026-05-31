@@ -15,36 +15,36 @@
 
 <!-- STAT CARDS -->
 <div class="stats-grid">
-  <div class="stat-card primary">
+  <a href="{% url 'asset_list' %}" class="stat-card primary" style="text-decoration:none;">
     <div class="stat-label">Total Assets</div>
     <div class="stat-value">{{ total_assets }}</div>
     <div class="stat-note">All registered assets</div>
-  </div>
-  <div class="stat-card success">
+  </a>
+  <a href="{% url 'asset_list' %}?status=available" class="stat-card success" style="text-decoration:none;">
     <div class="stat-label">Available</div>
     <div class="stat-value">{{ available }}</div>
     <div class="stat-note">Ready for use</div>
-  </div>
-  <div class="stat-card info">
+  </a>
+  <a href="{% url 'asset_list' %}?status=in_use" class="stat-card info" style="text-decoration:none;">
     <div class="stat-label">In Use</div>
     <div class="stat-value">{{ in_use }}</div>
     <div class="stat-note">Currently checked out</div>
-  </div>
-  <div class="stat-card warning">
+  </a>
+  <a href="{% url 'asset_list' %}?status=maintenance" class="stat-card warning" style="text-decoration:none;">
     <div class="stat-label">Maintenance</div>
     <div class="stat-value">{{ maintenance_count }}</div>
     <div class="stat-note">Under servicing</div>
-  </div>
-  <div class="stat-card danger">
+  </a>
+  <a href="{% url 'asset_list' %}?status=lost" class="stat-card danger" style="text-decoration:none;">
     <div class="stat-label">Lost</div>
     <div class="stat-value">{{ lost_count }}</div>
     <div class="stat-note">Marked as lost</div>
-  </div>
-  <div class="stat-card danger">
+  </a>
+  <a href="{% url 'asset_list' %}?overdue=true" class="stat-card danger" style="text-decoration:none;">
     <div class="stat-label">Overdue Maintenance</div>
     <div class="stat-value">{{ overdue_maintenance }}</div>
     <div class="stat-note">Passed scheduled date</div>
-  </div>
+  </a>
 </div>
 
 <!-- MAIN GRID -->

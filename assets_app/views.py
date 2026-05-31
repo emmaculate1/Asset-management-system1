@@ -92,6 +92,7 @@ def asset_list(request):
     dept_id    = request.GET.get('dept', '')
     type_filter = request.GET.get('type', '')
     status_filter = request.GET.get('status', '')
+    overdue_filter = request.GET.get('overdue', '')
 
     assets = Asset.objects.select_related('department', 'acquired_by_user')
 
@@ -107,6 +108,10 @@ def asset_list(request):
         assets = assets.filter(asset_type=type_filter)
     if status_filter:
         assets = assets.filter(status=status_filter)
+    if overdue_filter:
+        assets = assets.filter(
+            next_maintenance__lt=timezone.now().date()
+        ).exclude(status='decommissioned')
 
     departments = Department.objects.all()
     context = {
