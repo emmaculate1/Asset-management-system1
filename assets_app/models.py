@@ -90,6 +90,10 @@ class Asset(models.Model):
         return f"{self.asset_label} — {self.asset_name}"
 
     @property
+    def current_checkout(self):
+        return self.checkouts.filter(returned_at__isnull=True).first()
+
+    @property
     def is_overdue_maintenance(self):
         if self.next_maintenance:
             return self.next_maintenance < timezone.now().date()
@@ -110,6 +114,7 @@ class AssetCheckout(models.Model):
     checked_out_by_name  = models.CharField(max_length=200)
     checked_out_by_user  = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True,
                                               related_name='checkouts')
+    email                = models.EmailField(max_length=254, blank=True, help_text="Email address for notifications")
     purpose              = models.CharField(max_length=300, blank=True)
     checked_out_at       = models.DateTimeField(default=timezone.now)
     expected_return      = models.DateField(null=True, blank=True)
